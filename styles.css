@@ -1,0 +1,70 @@
+body {
+    background-color: honeydew;
+}
+
+h2 {
+    font-size: 1rem;
+}
+
+#diena {
+    border: 1px solid black;
+}
+
+.selected {
+    background-color: grey;
+    height: 120%;
+}
+
+.form {
+    display: flex;
+    max-width: 500px;
+    margin: 4% auto 1%;
+}
+
+.result {
+    display: flex;
+    max-width: 500px;
+    margin: 1% auto;
+}
+
+#button {
+    display: inline-block;
+    width: 100px;
+    background-color: #0038f0;
+    color: #FFF;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 10px;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: all .4s ease-in-out;
+}
+
+#button:hover {
+    background-color: #b92929;
+}
+
+.list {
+    padding-top: 2%;
+    width: 100%;
+}
+
+.item {
+    color: #343436;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+}
+
+.close {
+    color: red;
+    float: right;
+}
+
+input {
+    height: 40px;
+    width: 350px;
+    border: 2px solid #0038f0;
+    background: transparent;
+    border-radius: 5px;
+}
