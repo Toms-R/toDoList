@@ -36,7 +36,33 @@ $(document).ready(function() {
     console.log(times);
 
 
+    // Create task
+    function createTask(id, text) {
+        $(".list").append("<li contenteditable='true' class='item' data-id=" + id + ">" + text + "<a class='close'>X</a> </li>");
+    };
 
+
+
+
+    //GET all tasks
+    myTasks = {};
+    $.ajax({
+        type: 'GET',
+        url: "/cdc/read_tasks.php",
+        data: myTasks,
+        dataType: "text",
+        success: function(resultTasks) {
+            var deitaRead = JSON.parse(resultTasks);
+            console.log(deitaRead.data[0].uzdevums);
+            //console.log(resultTasks);
+            deitaRead.data.forEach(function(item, index) {
+                console.log(item, index);
+                createTask(item.id, item.uzdevums);
+            });
+
+
+        }
+    });
 
 
 
@@ -57,7 +83,8 @@ $(document).ready(function() {
                 var deita = JSON.parse(resultData);
                 console.log(deita.id);
                 console.log(resultData);
-                $(".list").append("<li contenteditable='true' class='item' data-id=" + deita.id + ">" + addedText + "<a class='close'>X</a>" + '</li>');
+                createTask(deita.id, addedText);
+
             }
         });
         //saveData.error(function() { alert("Something went wrong"); });
