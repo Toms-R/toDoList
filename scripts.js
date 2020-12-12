@@ -32,17 +32,11 @@ $(document).ready(function() {
     //write times
     document.getElementById("tBody").innerHTML = rowText;
 
-    console.log(topRow);
-    console.log(times);
-
 
     // Create task
     function createTask(id, text) {
         $(".list").append("<li contenteditable='true' class='item' data-id=" + id + ">" + text + "<a class='close'>X</a> </li>");
     };
-
-
-
 
     //GET all tasks
     myTasks = {};
@@ -53,23 +47,14 @@ $(document).ready(function() {
         dataType: "text",
         success: function(resultTasks) {
             var deitaRead = JSON.parse(resultTasks);
-            console.log(deitaRead.data[0].uzdevums);
-            //console.log(resultTasks);
-            deitaRead.data.forEach(function(item, index) {
-                console.log(item, index);
+
+            deitaRead.data.forEach(function(item) {
                 createTask(item.id, item.uzdevums);
             });
-
-
         }
     });
 
-
-
-
-
     $("#button").click(function() {
-
 
         var addedText = $('input[name=checkListItem]').val();
         var MyText = { 'uzdevums': addedText };
@@ -81,23 +66,15 @@ $(document).ready(function() {
             dataType: "text",
             success: function(resultData) {
                 var deita = JSON.parse(resultData);
-                console.log(deita.id);
-                console.log(resultData);
                 createTask(deita.id, addedText);
-
             }
         });
-        //saveData.error(function() { alert("Something went wrong"); });
-
-
-
     });
 
-    $(document).on('click', '.item', function() {
-        //$(this).css("text-decoration", "line-through");
-
-
-    });
+    //TODO implement done functionality
+    // $(document).on('click', '.item', function() {
+    //     //$(this).css("text-decoration", "line-through");
+    // });
 
     $(document).on('click', '.item a', function() {
         $(this).closest("li").fadeOut(1000, function() { $(this).remove(); });
@@ -108,22 +85,14 @@ $(document).ready(function() {
 
 
     $(document).click(function(event) {
-        console.log(event.target);
-
         //when td element is clicked give it a class .selected
         divID = $(event.target);
         if (divID.is("td")) {
             divID.toggleClass("selected");
         }
+
         if (divID.className = "selected") {
             //$(".modal").modal();
         }
-
-
-
-
     });
-
-
-
 });
