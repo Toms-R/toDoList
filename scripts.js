@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 
         var addedText = $('input[name=checkListItem]').val();
-        var MyText = { 'name': 'Janis', 'lastname': 'Uzdevums' };
+        var MyText = {};
         //insert 
         var saveData = $.ajax({
             type: 'POST',
