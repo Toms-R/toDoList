@@ -19,12 +19,51 @@
 </head>
 
 <body>
+
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="staticBackdropLabel">Uzdevums</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- <div class="form">
+                        <form name="checkListForm">
+                            <input type="text" name="checkListItem" />
+                        </form>
+                        <div id="button" class="align-middle">
+                            Pievienot
+                        </div><br/>
+                    </div>
+                    <div class="result">
+                        <ol class="list"></ol>
+                    </div> -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancel-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <section>
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <h1>To do list</h1>
-                    <button onclick="GetScope();">Button</button>
+
                     <div class="row">
                         <div class="col-9">
                             <table class="table" id="myTable">
@@ -205,7 +244,6 @@
                             </table>
                         </div>
                         <div class="col-3">
-                            <h1>Donezo list</h1>
                             <div class="form">
                                 <form name="checkListForm">
                                     <input type="text" name="checkListItem" />
@@ -218,6 +256,7 @@
                                 <ol class="list"></ol>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

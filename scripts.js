@@ -3,26 +3,49 @@ var divID;
 $(document).click(function(event) {
     console.log(event.target);
 
-
+    //when td element is clicked give it a class .selected
     divID = $(event.target);
     if (divID.is("td")) {
-        divID.addClass("selected");
+        divID.toggleClass("selected");
     }
+    if (divID.className = "selected") {
+        //$(".modal").modal();
+    }
+
 
 
 
 });
 
-function GetScope() {
-    console.log($(".table").find('th').text());
-}
+
+
 
 
 $(document).ready(function() {
 
+
+
     $("#button").click(function() {
+
+
         var addedText = $('input[name=checkListItem]').val();
-        $(".list").append('<li class="item">' + addedText + "<a class='close'>X</a>" + '</li>');
+        var MyText = { 'name': 'Janis', 'lastname': 'Uzdevums' };
+        //insert 
+        var saveData = $.ajax({
+            type: 'POST',
+            url: "/cdc/create.php",
+            data: MyText,
+            dataType: "text",
+            success: function(resultData) {
+                var deita = JSON.parse(resultData);
+                console.log(deita.id);
+                console.log(resultData);
+            }
+        });
+        //saveData.error(function() { alert("Something went wrong"); });
+
+        $(".list").append('<li class="item" data-id="">' + addedText + "<a class='close'>X</a>" + '</li>');
+
     });
 
     $(document).on('click', '.item', function() {
