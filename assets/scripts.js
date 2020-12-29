@@ -1,7 +1,6 @@
 var divID;
 $(document).ready(function() {
 
-
     //generate table 
 
     var topRow = ['Laiks', 'Pirmdiena', 'Otrdiena', 'Trešdiena', 'Ceturdiena', 'Piektdiena', 'Sestdiena', 'Svētdiena'];
@@ -18,7 +17,6 @@ $(document).ready(function() {
     }
     headerText += "</tr>";
 
-
     rowText = "";
     for (j = 0; j < timesLength; j++) {
 
@@ -32,17 +30,16 @@ $(document).ready(function() {
     //write times
     document.getElementById("tBody").innerHTML = rowText;
 
-
     // Create task
     function createTask(id, text) {
-        $(".list").append("<li contenteditable='true' class='item' data-id=" + id + ">" + text + "<a class='close'>X</a> </li>");
+        $(".list").append("<li class='item' contenteditable='true' data-id=" + id + ">" + text + "<a class='close'>X</a> </li>");
     };
 
     //GET all tasks
     myTasks = {};
     $.ajax({
         type: 'GET',
-        url: "/cdc/read_tasks.php",
+        url: "api/read_tasks.php",
         data: myTasks,
         dataType: "text",
         success: function(resultTasks) {
@@ -61,7 +58,7 @@ $(document).ready(function() {
         //insert 
         var saveData = $.ajax({
             type: 'POST',
-            url: "/cdc/createTask.php",
+            url: "api/create_task.php",
             data: MyText,
             dataType: "text",
             success: function(resultData) {
@@ -77,12 +74,41 @@ $(document).ready(function() {
     // });
 
     $(document).on('click', '.item a', function() {
-        $(this).closest("li").fadeOut(1000, function() { $(this).remove(); });
+
+        var task = $(this).closest("li");
+        var teskId = task.data("id");
+        var myTask = { "id": teskId };
+        $.ajax({
+            type: 'DELETE',
+            url: "api/delete_task.php?id=" + teskId,
+            data: myTask,
+            dataType: "text",
+            success: function() {
+                task.fadeOut(1000, function() { $(this).remove(); });
+            }
+        });
     });
 
+    //Update task
+    $(document).on('click', '.item', function() {
+        var task = $(this);
+        var teskId = task.data("id");
+        var actualTask = task.text();
+    });
 
-
-
+    $(document).on('blur', '.item', function() {
+        var task = $(this);
+        var teskId = task.data("id");
+        var actualTask = task.text().replace('X', '');
+        var selectedTask = { "id": teskId, "uzdevums": actualTask };
+        $.ajax({
+            type: 'PUT',
+            url: "api/update_task.php",
+            data: selectedTask,
+            dataType: "text",
+            success: function() {}
+        });
+    });
 
     $(document).click(function(event) {
         //when td element is clicked give it a class .selected
