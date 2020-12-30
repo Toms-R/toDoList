@@ -1,34 +1,71 @@
+window.getCookie = function(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) return match[2];
+}
+
+window.onload = function() {
+    var cookieValue = window.getCookie("Theme");
+    if (typeof cookieValue !== 'undefined') {
+        console.log(window.getCookie("Theme"));
+        document.getElementById("theme-color").value == cookieValue;
+
+        if (cookieValue == "light") {
+            document.getElementById("theme-color").classList.remove("dark-mode");
+        }
+
+        if (cookieValue == "dark") {
+            var bodyClass = document.getElementById("theme-color");
+            bodyClass.classList.add("dark-mode");
+        }
+    }
+}
+
+function changed() {
+    var theme = document.getElementById("themeSelector").value;
+    console.log(theme);
+    if (theme == "dark") {
+        var bodyClass = document.getElementById("theme-color");
+        bodyClass.classList.add("dark-mode");
+    }
+
+    if (theme == "light") {
+        document.getElementById("theme-color").classList.remove("dark-mode");
+    }
+    document.cookie = "Theme=" + theme + "; expires=Sat, 30 Jan 2021 01:00:00 UTC;";
+    console.log(document.cookie);
+}
+
 var divID;
 $(document).ready(function() {
 
     //generate table 
 
-    var topRow = ['Laiks', 'Pirmdiena', 'Otrdiena', 'Trešdiena', 'Ceturdiena', 'Piektdiena', 'Sestdiena', 'Svētdiena'];
-    var times = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', ];
+    // var topRow = ['Laiks', 'Pirmdiena', 'Otrdiena', 'Trešdiena', 'Ceturdiena', 'Piektdiena', 'Sestdiena', 'Svētdiena'];
+    // var times = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', ];
 
-    topRowLength = topRow.length;
-    timesLength = times.length;
+    // topRowLength = topRow.length;
+    // timesLength = times.length;
 
     //generate header text
 
-    headerText = "<tr>";
-    for (i = 0; i < topRowLength; i++) {
-        headerText += "<th  scope='col'>" + topRow[i] + "</th>";
-    }
-    headerText += "</tr>";
+    // headerText = "<tr>";
+    // for (i = 0; i < topRowLength; i++) {
+    //     headerText += "<th  scope='col'>" + topRow[i] + "</th>";
+    // }
+    // headerText += "</tr>";
 
-    rowText = "";
-    for (j = 0; j < timesLength; j++) {
+    // rowText = "";
+    // for (j = 0; j < timesLength; j++) {
 
-        rowText += "<tr>" + "<th scope='row'>" + times[j] + "</th>" + "<td></td><td></td><td></td><td></td><td></td><td></td><td></td>" + "</tr>";
-    }
-    rowText += "";
+    //     rowText += "<tr>" + "<th scope='row'>" + times[j] + "</th>" + "<td></td><td></td><td></td><td></td><td></td><td></td><td></td>" + "</tr>";
+    // }
+    // rowText += "";
 
     //write Header text
-    document.getElementById("tHeader").innerHTML = headerText;
+    //document.getElementById("tHeader").innerHTML = headerText;
 
     //write times
-    document.getElementById("tBody").innerHTML = rowText;
+    // document.getElementById("tBody").innerHTML = rowText;
 
     // Create task
     function createTask(id, text) {

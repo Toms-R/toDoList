@@ -1,5 +1,17 @@
 body {
-    background-color: honeydew;
+    background-color: antiquewhite;
+    color: black;
+}
+
+.dark-mode {
+    background-color: midnightblue;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    font-family: cursive;
 }
 
 h2 {
@@ -34,14 +46,15 @@ h2 {
     color: #FFF;
     border-radius: 5px;
     text-align: center;
-    margin: 0 10px;
+    margin: auto;
     cursor: pointer;
     padding: 8px 12px;
     transition: all .4s ease-in-out;
+    font-family: cursive;
 }
 
 #button:hover {
-    background-color: #b92929;
+    background-color: #0129bb;
 }
 
 .list {
@@ -50,15 +63,17 @@ h2 {
 }
 
 .item {
-    color: #343436;
     text-align: left;
     cursor: pointer;
     width: 100%;
+    font-family: cursive;
 }
 
 .close {
-    color: red;
+    color: #e66612;
     float: right;
+    text-shadow: none;
+    opacity: .5;
 }
 
 input {
@@ -67,4 +82,6 @@ input {
     border: 2px solid #0038f0;
     background: transparent;
     border-radius: 5px;
+    font-size: 24px;
+    font-family: cursive;
 }
