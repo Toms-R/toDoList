@@ -69,7 +69,7 @@ $(document).ready(function() {
 
     // Create task
     function createTask(id, text) {
-        $(".list").append("<li class='item' contenteditable='true' data-id=" + id + ">" + text + "<a class='close'>X</a> </li>");
+        $(".list").append("<li class='item' contenteditable='true' data-id=" + id + ">" + text + "<a class='close'>X</a><span id='floppy'><i class='fa fa-floppy-o' aria-hidden='true'></i></span></li>");
     };
 
     //GET all tasks
@@ -101,6 +101,7 @@ $(document).ready(function() {
             success: function(resultData) {
                 var deita = JSON.parse(resultData);
                 createTask(deita.id, addedText);
+                $('input[name=checkListItem]').val('');
             }
         });
     });
@@ -127,10 +128,14 @@ $(document).ready(function() {
     });
 
     //Update task
+
+
     $(document).on('click', '.item', function() {
         var task = $(this);
         var teskId = task.data("id");
         var actualTask = task.text();
+        $("#floppy", task).css('display', 'block');
+        task.css("color", "red");
     });
 
     $(document).on('blur', '.item', function() {
@@ -138,12 +143,33 @@ $(document).ready(function() {
         var teskId = task.data("id");
         var actualTask = task.text().replace('X', '');
         var selectedTask = { "id": teskId, "uzdevums": actualTask };
-        $.ajax({
-            type: 'PUT',
-            url: "api/update_task.php",
-            data: selectedTask,
-            dataType: "text",
-            success: function() {}
+        // Don't allow user to leave if all data is not saved.
+        // window.onbeforeunload = confirmExit;
+
+        // function confirmExit() {
+        //     return "You have attempted to leave this page. Are you sure?";
+        // }
+
+        $("#floppy", task).click(function() {
+            $.ajax({
+                type: 'PUT',
+                url: "api/update_task.php",
+                data: selectedTask,
+                dataType: "text",
+                success: function() {
+                    $("#floppy", task).css('display', 'none');
+                    console.log('clickeded');
+                    task.css("color", "");
+                    $("#successModal").fadeTo(2000, 500).slideUp(500, function() {
+                        $("#successModal").modal('hide');
+                    });
+                },
+                error: function() {
+                    $("#errorModal").fadeTo(2000, 500).slideUp(500, function() {
+                        $("#errorModal").modal('hide');
+                    });
+                }
+            });
         });
     });
 
