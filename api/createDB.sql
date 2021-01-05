@@ -1,0 +1,6 @@
+CREATE TABLE todolist (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    uzdevums varchar(255),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
