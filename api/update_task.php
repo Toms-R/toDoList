@@ -4,8 +4,8 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-include_once 'config.php';
-include_once 'PostTask.php';
+require_once 'db.php';
+require_once 'PostTask.php';
 
 $database = new Database();
 $db = $database->connect();

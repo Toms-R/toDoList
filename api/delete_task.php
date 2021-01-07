@@ -11,8 +11,8 @@
         die('error');
    }
 
-    include_once 'config.php';
-    include_once 'PostTask.php';
+    require_once 'db.php';
+    require_once 'PostTask.php';
 
     $database = new Database();
     $db = $database->connect();

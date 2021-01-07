@@ -2,8 +2,8 @@
     header('Acces-Control-Allow-Origin: *');
     header('Content-Type: application/json');
 
-    include_once 'config.php';
-    include_once 'PostTask.php';
+    require_once 'db.php';
+    require_once 'PostTask.php';
 
     $database = new Database();
     $db = $database->connect();
@@ -33,5 +33,3 @@
     else {
         echo json_encode(array('message' => 'No Tasks found'));
     }
-
-

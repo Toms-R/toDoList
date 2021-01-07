@@ -1,17 +1,14 @@
 <?php
     class Database
     {
-        private $host = 'localhost';
-        private $db_name = 'cdctest';
-        private $username = 'root';
-        private $password = '';
         private $conn;
 
         public function connect(){
+            $conf = parse_ini_file("config.ini", true);
             $this->conn = null;
-
+            
             try{
-                $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' .$this->db_name, $this->username, $this->password);
+                $this->conn = new PDO('mysql:host=' . $conf['DB']['host'] . ';dbname=' . $conf['DB']['name'], $conf['DB']['user'], $conf['DB']['pass']);
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             } catch(PDOException $e){

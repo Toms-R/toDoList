@@ -150,6 +150,8 @@ $(document).ready(function() {
         //     return "You have attempted to leave this page. Are you sure?";
         // }
 
+        // TODO confirm exit only when all items are saved.
+
         $("#floppy", task).click(function() {
             $.ajax({
                 type: 'PUT',
