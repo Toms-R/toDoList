@@ -109,11 +109,13 @@ $("#button").click(function() {
 // });
 
 $(document).on('click', '.item a.delete', function() {
+    console.log(task);
+    var task = $(this).closest("li");
+    var teskId = task.data("id");
+    var myTask = { "id": teskId };
+    var actualTask = task.text().replace('X', '');
+    if (confirm("Tiešām izdzēst? " + actualTask)) {
 
-    if (confirm("Tiešām izdzēst?")) {
-        var task = $(this).closest("li");
-        var teskId = task.data("id");
-        var myTask = { "id": teskId };
 
         $.ajax({
             type: 'DELETE',
@@ -142,14 +144,14 @@ $(document).on('click', '.item a.delete', function() {
 
 // });
 
-$('ol').on('click', '.floppy', function() {
-    console.log('321');
-    var task = $(this).closest('li');
 
+$('ol').on('click', '.floppy', function() {
+
+
+    var task = $(this).closest('li');
     var teskId = task.data("id");
     var actualTask = task.text().replace('X', '');
     var selectedTask = { "id": teskId, "uzdevums": actualTask };
-
     $.ajax({
         type: 'PUT',
         url: "api/update_task.php",
@@ -184,16 +186,13 @@ $(document).on('blur', '.item', function() {
     $(".floppy", task).css('display', 'block');
     task.css("color", "red");
 
-    // Don't allow user to leave if all data is not saved.
-    // window.onbeforeunload = confirmExit;
 
-    // function confirmExit() {
-    //     return "You have attempted to leave this page. Are you sure?";
-    // }
 
     // TODO confirm exit only when all items are saved.
 
 });
+
+
 
 // $(document).click(function(event) {
 //     //when td element is clicked give it a class .selected
