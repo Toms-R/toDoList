@@ -109,12 +109,12 @@ $("#button").click(function() {
 // });
 
 $(document).on('click', '.item a.delete', function() {
-    console.log(task);
     var task = $(this).closest("li");
     var teskId = task.data("id");
     var myTask = { "id": teskId };
-    var actualTask = task.text().replace('X', '');
-    if (confirm("Tiešām izdzēst? " + actualTask)) {
+    var actualTask = task.text().replace('X', '').trim();
+    console.log(actualTask);
+    if (confirm("Tiešām izdzēst: " + '"' + actualTask + '" ?')) {
 
 
         $.ajax({
@@ -133,25 +133,12 @@ $(document).on('click', '.item a.delete', function() {
 
 //Update task
 
-
-// $('ol').on('click', '.itemText', function() {
-//     var task = $(this).closest('li');
-
-//     console.log(task);
-//     var teskId = task.data("id");
-//     var actualTask = task.text().replace('X', '');
-//     var selectedTask = { "id": teskId, "uzdevums": actualTask };
-
-// });
-
-
 $('ol').on('click', '.floppy', function() {
-
-
     var task = $(this).closest('li');
     var teskId = task.data("id");
     var actualTask = task.text().replace('X', '');
     var selectedTask = { "id": teskId, "uzdevums": actualTask };
+
     $.ajax({
         type: 'PUT',
         url: "api/update_task.php",
@@ -173,22 +160,15 @@ $('ol').on('click', '.floppy', function() {
     });
 });
 
-
-
 $(document).on('blur', '.item', function() {
     console.log('123');
     var task = $(this);
     var teskId = task.data("id");
-
     var actualTask = task.text().replace('X', '');
     var selectedTask = { "id": teskId, "uzdevums": actualTask };
 
     $(".floppy", task).css('display', 'block');
     task.css("color", "red");
-
-
-
-    // TODO confirm exit only when all items are saved.
 
 });
 
