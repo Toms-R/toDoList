@@ -172,7 +172,16 @@ $(document).on('blur', '.item', function() {
 
 });
 
+window.addEventListener('beforeunload',
+    function(e) {
 
+
+        if ($(".floppy").is(":visible")) {
+
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
 
 // $(document).click(function(event) {
 //     //when td element is clicked give it a class .selected
